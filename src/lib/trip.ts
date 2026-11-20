@@ -1,13 +1,12 @@
 import nairobiImg from "@/assets/region-nairobi.jpg";
 import maraImg from "@/assets/region-mara.jpg";
-import naivashaImg from "@/assets/region-naivasha.jpg";
-import dianiImg from "@/assets/region-diani.jpg";
+import nyamiraImg from "@/assets/region-nyamira.jpg";
 import { format, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
 
 export const TRIP = {
   name: "Karibu Kenya",
-  tagline: "Notre aventure entre amis, de Nairobi à l'océan Indien",
+  tagline: "Nairobi, le Masai Mara et les collines de thé de Nyamira, entre amis",
   start: "2026-12-30",
   end: "2027-01-10",
 };
@@ -15,15 +14,13 @@ export const TRIP = {
 export const REGION_IMAGES: Record<string, string> = {
   nairobi: nairobiImg,
   mara: maraImg,
-  naivasha: naivashaImg,
-  diani: dianiImg,
+  nyamira: nyamiraImg,
 };
 
 export const REGIONS = [
   { value: "nairobi", label: "Nairobi" },
   { value: "mara", label: "Masai Mara" },
-  { value: "naivasha", label: "Lacs de la vallée du Rift" },
-  { value: "diani", label: "Côte & Diani" },
+  { value: "nyamira", label: "Nyamira & collines de thé" },
 ];
 
 export function regionImage(region: string | null | undefined) {
