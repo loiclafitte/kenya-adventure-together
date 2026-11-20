@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1795211025707,
+      "tag": "0000_kenya_trip_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795211126045,
+      "tag": "0001_reschedule_trip_12_days",
+      "breakpoints": true
+    }
+  ]
+}

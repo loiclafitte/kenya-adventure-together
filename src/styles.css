@@ -1,35 +1,23 @@
 /*
- * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
- * - Keep every @import in this top block, above @theme and the rest of the file. Install an
- *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
- *   build resolves @import from the filesystem. Load those with a <link> in the head() of
- *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ * Tailwind v4 entry: config lives here. Keep every @import in this top block.
  */
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
 
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The design lives in this file: oklch color tokens on the shadcn variables
- * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
- * new tokens as needed, font tokens, and custom styles and animations.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * Karibu Kenya design system — warm savanna palette:
+ * sand background, earth-brown text, terracotta (Maasai shuka) primary,
+ * acacia green, savanna gold, lagoon blue and flamingo pink accents.
  */
 
 @theme inline {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Figtree", system-ui, sans-serif;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -70,77 +58,91 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Kenyan nature accents */
+  --color-earth: var(--earth);
+  --color-earth-foreground: var(--earth-foreground);
+  --color-savanna: var(--savanna);
+  --color-savanna-foreground: var(--savanna-foreground);
+  --color-ochre: var(--ochre);
+  --color-ochre-foreground: var(--ochre-foreground);
+  --color-acacia: var(--acacia);
+  --color-acacia-foreground: var(--acacia-foreground);
+  --color-flamingo: var(--flamingo);
+  --color-flamingo-foreground: var(--flamingo-foreground);
+  --color-lagoon: var(--lagoon);
+  --color-lagoon-foreground: var(--lagoon-foreground);
+  --color-sand: var(--sand);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+  --radius: 1rem;
+  --background: oklch(0.965 0.02 80);
+  --foreground: oklch(0.27 0.045 45);
+  --card: oklch(0.99 0.012 85);
+  --card-foreground: oklch(0.27 0.045 45);
+  --popover: oklch(0.99 0.012 85);
+  --popover-foreground: oklch(0.27 0.045 45);
+  --primary: oklch(0.57 0.16 38);
+  --primary-foreground: oklch(0.985 0.012 85);
+  --secondary: oklch(0.92 0.05 82);
+  --secondary-foreground: oklch(0.32 0.06 50);
+  --muted: oklch(0.93 0.025 78);
+  --muted-foreground: oklch(0.5 0.045 55);
+  --accent: oklch(0.9 0.04 135);
+  --accent-foreground: oklch(0.33 0.07 145);
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: oklch(0.985 0.012 85);
+  --border: oklch(0.87 0.035 75);
+  --input: oklch(0.86 0.035 75);
+  --ring: oklch(0.57 0.16 38);
+  --chart-1: oklch(0.57 0.16 38);
+  --chart-2: oklch(0.52 0.09 145);
+  --chart-3: oklch(0.6 0.09 215);
+  --chart-4: oklch(0.78 0.14 78);
+  --chart-5: oklch(0.7 0.13 10);
+  --sidebar: oklch(0.97 0.02 80);
+  --sidebar-foreground: oklch(0.27 0.045 45);
+  --sidebar-primary: oklch(0.57 0.16 38);
+  --sidebar-primary-foreground: oklch(0.985 0.012 85);
+  --sidebar-accent: oklch(0.92 0.05 82);
+  --sidebar-accent-foreground: oklch(0.32 0.06 50);
+  --sidebar-border: oklch(0.87 0.035 75);
+  --sidebar-ring: oklch(0.57 0.16 38);
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --earth: oklch(0.27 0.045 45);
+  --earth-foreground: oklch(0.96 0.025 82);
+  --savanna: oklch(0.8 0.14 80);
+  --savanna-foreground: oklch(0.3 0.06 55);
+  --ochre: oklch(0.66 0.15 58);
+  --ochre-foreground: oklch(0.99 0.01 85);
+  --acacia: oklch(0.5 0.09 145);
+  --acacia-foreground: oklch(0.99 0.01 85);
+  --flamingo: oklch(0.68 0.14 10);
+  --flamingo-foreground: oklch(0.99 0.01 85);
+  --lagoon: oklch(0.56 0.09 215);
+  --lagoon-foreground: oklch(0.99 0.01 85);
+  --sand: oklch(0.94 0.03 82);
+  --success: oklch(0.5 0.09 145);
+  --success-foreground: oklch(0.99 0.01 85);
+  --warning: oklch(0.8 0.14 80);
+  --warning-foreground: oklch(0.3 0.06 55);
+
+  --gradient-sunset: linear-gradient(135deg, oklch(0.62 0.17 40), oklch(0.76 0.15 70));
+  --gradient-savanna: linear-gradient(180deg, oklch(0.97 0.02 80), oklch(0.93 0.04 78));
+  --gradient-hero-fade: linear-gradient(
+    180deg,
+    oklch(0.2 0.04 40 / 0.05) 0%,
+    oklch(0.2 0.04 40 / 0.2) 45%,
+    oklch(0.2 0.04 40 / 0.85) 100%
+  );
+  --gradient-card-fade: linear-gradient(180deg, transparent 30%, oklch(0.2 0.04 40 / 0.8) 100%);
+  --shadow-warm: 0 10px 30px -12px oklch(0.45 0.12 45 / 0.35);
+  --shadow-soft: 0 2px 10px -4px oklch(0.45 0.08 45 / 0.25);
 }
 
 @layer base {
@@ -148,8 +150,104 @@
     border-color: var(--color-border);
   }
 
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Maasai shuka inspired stripe band */
+@utility shuka-band {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--primary) 0 18px,
+    var(--earth) 18px 22px,
+    var(--savanna) 22px 30px,
+    var(--earth) 30px 34px,
+    var(--lagoon) 34px 40px,
+    var(--earth) 40px 44px
+  );
+}
+
+@utility bg-sunset {
+  background-image: var(--gradient-sunset);
+}
+
+@utility bg-hero-fade {
+  background-image: var(--gradient-hero-fade);
+}
+
+@utility bg-card-fade {
+  background-image: var(--gradient-card-fade);
+}
+
+@utility shadow-warm {
+  box-shadow: var(--shadow-warm);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility pb-safe-nav {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+@utility fade-up {
+  animation: fade-up 0.5s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Leaflet popups in the app style */
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--sand);
+}
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--card-foreground);
+  box-shadow: var(--shadow-warm);
+}
+.leaflet-popup-tip {
+  background: var(--card);
+}
+.map-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px 9999px 9999px 0;
+  transform: rotate(-45deg);
+  border: 2px solid var(--card);
+  box-shadow: var(--shadow-soft);
+  color: var(--primary-foreground);
+  font-weight: 700;
+  font-size: 12px;
+}
+.map-pin > span {
+  transform: rotate(45deg);
 }
