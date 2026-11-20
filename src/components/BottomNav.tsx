@@ -86,7 +86,6 @@ export function BottomNav() {
               <Link
                 key={to}
                 to={to}
-                search={to === "/scores" ? {} : undefined}
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 rounded-2xl bg-secondary px-4 py-3.5 text-sm font-semibold text-secondary-foreground"
               >

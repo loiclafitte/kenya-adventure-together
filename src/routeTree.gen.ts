@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedCarteRouteImport } from './routes/_authenticated/carte'
+import { Route as AuthenticatedClassementRouteImport } from './routes/_authenticated/classement'
+import { Route as AuthenticatedEquipesRouteImport } from './routes/_authenticated/equipes'
+import { Route as AuthenticatedInfosRouteImport } from './routes/_authenticated/infos'
+import { Route as AuthenticatedJeuxRouteImport } from './routes/_authenticated/jeux'
+import { Route as AuthenticatedParticipantsRouteImport } from './routes/_authenticated/participants'
+import { Route as AuthenticatedProgrammeRouteImport } from './routes/_authenticated/programme'
+import { Route as AuthenticatedScoresRouteImport } from './routes/_authenticated/scores'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCarteRoute = AuthenticatedCarteRouteImport.update({
+  id: '/carte',
+  path: '/carte',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedClassementRoute = AuthenticatedClassementRouteImport.update({
+  id: '/classement',
+  path: '/classement',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEquipesRoute = AuthenticatedEquipesRouteImport.update({
+  id: '/equipes',
+  path: '/equipes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedInfosRoute = AuthenticatedInfosRouteImport.update({
+  id: '/infos',
+  path: '/infos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedJeuxRoute = AuthenticatedJeuxRouteImport.update({
+  id: '/jeux',
+  path: '/jeux',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedParticipantsRoute =
+  AuthenticatedParticipantsRouteImport.update({
+    id: '/participants',
+    path: '/participants',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedProgrammeRoute = AuthenticatedProgrammeRouteImport.update({
+  id: '/programme',
+  path: '/programme',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedScoresRoute = AuthenticatedScoresRouteImport.update({
+  id: '/scores',
+  path: '/scores',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/carte': typeof AuthenticatedCarteRoute
+  '/classement': typeof AuthenticatedClassementRoute
+  '/equipes': typeof AuthenticatedEquipesRoute
+  '/infos': typeof AuthenticatedInfosRoute
+  '/jeux': typeof AuthenticatedJeuxRoute
+  '/participants': typeof AuthenticatedParticipantsRoute
+  '/programme': typeof AuthenticatedProgrammeRoute
+  '/scores': typeof AuthenticatedScoresRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/carte': typeof AuthenticatedCarteRoute
+  '/classement': typeof AuthenticatedClassementRoute
+  '/equipes': typeof AuthenticatedEquipesRoute
+  '/infos': typeof AuthenticatedInfosRoute
+  '/jeux': typeof AuthenticatedJeuxRoute
+  '/participants': typeof AuthenticatedParticipantsRoute
+  '/programme': typeof AuthenticatedProgrammeRoute
+  '/scores': typeof AuthenticatedScoresRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/carte': typeof AuthenticatedCarteRoute
+  '/_authenticated/classement': typeof AuthenticatedClassementRoute
+  '/_authenticated/equipes': typeof AuthenticatedEquipesRoute
+  '/_authenticated/infos': typeof AuthenticatedInfosRoute
+  '/_authenticated/jeux': typeof AuthenticatedJeuxRoute
+  '/_authenticated/participants': typeof AuthenticatedParticipantsRoute
+  '/_authenticated/programme': typeof AuthenticatedProgrammeRoute
+  '/_authenticated/scores': typeof AuthenticatedScoresRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/admin'
+    | '/carte'
+    | '/classement'
+    | '/equipes'
+    | '/infos'
+    | '/jeux'
+    | '/participants'
+    | '/programme'
+    | '/scores'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/admin'
+    | '/carte'
+    | '/classement'
+    | '/equipes'
+    | '/infos'
+    | '/jeux'
+    | '/participants'
+    | '/programme'
+    | '/scores'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/admin'
+    | '/_authenticated/carte'
+    | '/_authenticated/classement'
+    | '/_authenticated/equipes'
+    | '/_authenticated/infos'
+    | '/_authenticated/jeux'
+    | '/_authenticated/participants'
+    | '/_authenticated/programme'
+    | '/_authenticated/scores'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,117 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/carte': {
+      id: '/_authenticated/carte'
+      path: '/carte'
+      fullPath: '/carte'
+      preLoaderRoute: typeof AuthenticatedCarteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/classement': {
+      id: '/_authenticated/classement'
+      path: '/classement'
+      fullPath: '/classement'
+      preLoaderRoute: typeof AuthenticatedClassementRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/equipes': {
+      id: '/_authenticated/equipes'
+      path: '/equipes'
+      fullPath: '/equipes'
+      preLoaderRoute: typeof AuthenticatedEquipesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/infos': {
+      id: '/_authenticated/infos'
+      path: '/infos'
+      fullPath: '/infos'
+      preLoaderRoute: typeof AuthenticatedInfosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/jeux': {
+      id: '/_authenticated/jeux'
+      path: '/jeux'
+      fullPath: '/jeux'
+      preLoaderRoute: typeof AuthenticatedJeuxRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/participants': {
+      id: '/_authenticated/participants'
+      path: '/participants'
+      fullPath: '/participants'
+      preLoaderRoute: typeof AuthenticatedParticipantsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/programme': {
+      id: '/_authenticated/programme'
+      path: '/programme'
+      fullPath: '/programme'
+      preLoaderRoute: typeof AuthenticatedProgrammeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/scores': {
+      id: '/_authenticated/scores'
+      path: '/scores'
+      fullPath: '/scores'
+      preLoaderRoute: typeof AuthenticatedScoresRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedCarteRoute: typeof AuthenticatedCarteRoute
+  AuthenticatedClassementRoute: typeof AuthenticatedClassementRoute
+  AuthenticatedEquipesRoute: typeof AuthenticatedEquipesRoute
+  AuthenticatedInfosRoute: typeof AuthenticatedInfosRoute
+  AuthenticatedJeuxRoute: typeof AuthenticatedJeuxRoute
+  AuthenticatedParticipantsRoute: typeof AuthenticatedParticipantsRoute
+  AuthenticatedProgrammeRoute: typeof AuthenticatedProgrammeRoute
+  AuthenticatedScoresRoute: typeof AuthenticatedScoresRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedCarteRoute: AuthenticatedCarteRoute,
+  AuthenticatedClassementRoute: AuthenticatedClassementRoute,
+  AuthenticatedEquipesRoute: AuthenticatedEquipesRoute,
+  AuthenticatedInfosRoute: AuthenticatedInfosRoute,
+  AuthenticatedJeuxRoute: AuthenticatedJeuxRoute,
+  AuthenticatedParticipantsRoute: AuthenticatedParticipantsRoute,
+  AuthenticatedProgrammeRoute: AuthenticatedProgrammeRoute,
+  AuthenticatedScoresRoute: AuthenticatedScoresRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
